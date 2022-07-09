@@ -1,8 +1,16 @@
+import PropTypes from 'prop-types';
+import { Input, Form, Label } from '../ContactForm';
+
 export const Filter = ({ filtredValue, onSearch }) => (
-  <>
-    <label>
+  <Form>
+    <Label>
       Find contacts by name
-      <input type="text" value={filtredValue} onChange={onSearch} />
-    </label>
-  </>
+      <Input type="text" value={filtredValue} onChange={onSearch} />
+    </Label>
+  </Form>
 );
+
+Filter.propTypes = {
+  filtredValue: PropTypes.string.isRequired,
+  onSearch: PropTypes.func.isRequired,
+};

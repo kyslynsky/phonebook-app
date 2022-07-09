@@ -1,8 +1,12 @@
 import { Component } from 'react';
+import { Notify } from 'notiflix';
+import { nanoid } from 'nanoid';
+import { Section } from './Section';
 import { GlobalStyle } from './GlobalStyles';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
+import { Container } from './Container';
 export class App extends Component {
   state = {
     contacts: [
@@ -15,8 +19,21 @@ export class App extends Component {
   };
 
   addContact = ({ name, number }) => {
+    const normalizedName = name.toLowerCase();
+    const ifExist = this.state.contacts.some(
+      contact => contact.name.toLowerCase() === normalizedName
+    );
+    if (ifExist) {
+      Notify.failure(`${name} is already exist`, {
+        clickToClose: true,
+        distance: '20px',
+        fontFamily: 'inherit',
+      });
+      return;
+    }
+
     const contact = {
-      id: Date.now(),
+      id: nanoid(),
       name,
       number,
     };
@@ -39,31 +56,35 @@ export class App extends Component {
     );
   };
 
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   render() {
     const { filter } = this.state;
     const filteredContacts = this.getFiltredContacts();
 
     return (
       <>
-        <div>
-          <h1>Phonebook</h1>
-          <ContactForm onSubmit={this.addContact} />
-
-          <h2>Contacts</h2>
-          <Filter filtredValue={filter} onSearch={this.changeFilter} />
-          <ContactList data={filteredContacts} />
-        </div>
-        <GlobalStyle />
+        <Container>
+          <div>
+            <Section title="Phonebook">
+              <ContactForm onSubmit={this.addContact} />
+            </Section>
+          
+            <Section title="Contacts">
+              <Filter filtredValue={filter} onSearch={this.changeFilter} />
+              <ContactList
+                data={filteredContacts}
+                onDelete={this.deleteContact}
+              />
+            </Section>
+          </div>
+          <GlobalStyle />
+        </Container>
       </>
     );
   }
 }
-
-/* <div>
-  <h1>Phonebook</h1>
-  <ContactForm ... />
-
-  <h2>Contacts</h2>
-  <Filter ... />
-  <ContactList ... />
-</div> */
