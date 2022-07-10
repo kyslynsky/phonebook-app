@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import { Notify } from 'notiflix';
 import { nanoid } from 'nanoid';
-import { Section } from './Section';
-import { GlobalStyle } from './GlobalStyles';
-import { ContactForm } from './ContactForm';
-import { ContactList } from './ContactList';
-import { Filter } from './Filter';
-import { Container } from './Container';
+import { Section } from 'components/Section';
+import { GlobalStyle } from 'components/GlobalStyles';
+import { ContactForm } from 'components/ContactForm';
+import { ContactList } from 'components/ContactList';
+import { Filter } from 'components/Filter';
+import { Container } from 'components/Container';
 export class App extends Component {
   state = {
     contacts: [
@@ -43,8 +43,8 @@ export class App extends Component {
     }));
   };
 
-  changeFilter = evt => {
-    this.setState({ filter: evt.currentTarget.value });
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
   };
 
   getFiltredContacts = () => {
@@ -69,19 +69,17 @@ export class App extends Component {
     return (
       <>
         <Container>
-          <div>
-            <Section title="Phonebook">
-              <ContactForm onSubmit={this.addContact} />
-            </Section>
-          
-            <Section title="Contacts">
-              <Filter filtredValue={filter} onSearch={this.changeFilter} />
-              <ContactList
-                data={filteredContacts}
-                onDelete={this.deleteContact}
-              />
-            </Section>
-          </div>
+          <Section title="Phonebook">
+            <ContactForm onSubmit={this.addContact} />
+          </Section>
+
+          <Section title="Contacts">
+            <Filter filtredValue={filter} onSearch={this.changeFilter} />
+            <ContactList
+              data={filteredContacts}
+              onDelete={this.deleteContact}
+            />
+          </Section>
           <GlobalStyle />
         </Container>
       </>

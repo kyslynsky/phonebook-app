@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { List, ListItem, Button, ContactName } from './ContactList.styled';
 
 export const ContactList = ({ data, onDelete }) => (
-  <>
     <List>
       {data.map(({ id, name, number }) => (
         <ListItem key={id}>
@@ -14,7 +13,6 @@ export const ContactList = ({ data, onDelete }) => (
         </ListItem>
       ))}
     </List>
-  </>
 );
 
 ContactList.propTypes = {
