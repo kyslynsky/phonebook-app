@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import { Form, Label, Input, Button } from './ContactForm.styled';
 export class ContactForm extends Component {
   state = {
@@ -37,6 +38,7 @@ export class ContactForm extends Component {
             required
           />
         </Label>
+
         <Label>
           Number
           <Input
