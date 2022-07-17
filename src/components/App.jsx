@@ -60,13 +60,9 @@ export class App extends Component {
 
   componentDidMount() {
     const storageContacts = localStorage.getItem('contacts');
-    if (storageContacts.length > 0) {
+    if (storageContacts) {
       this.setState({ contacts: JSON.parse(storageContacts) });
     }
-
-    // if (parsedContacts) {
-    // this.setState({ contacts: parsedContacts });
-    // }
   }
 
   componentDidUpdate(_prevProps, prevState) {
