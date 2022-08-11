@@ -16,6 +16,7 @@ export const Label = styled.label`
   align-items: center;
   padding: 7px;
   font-weight: 500;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     color: #007fff;
@@ -29,6 +30,7 @@ export const Input = styled.input`
   border-radius: 5px;
   box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -5px,
     rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+  transition: all 0.2s ease-in-out;
 
   &:hover,
   &:focus {
@@ -52,6 +54,7 @@ export const Button = styled.button`
   background-color: #1976d2;
   box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
     0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+  transition: all 0.2s ease-in-out;
 
   &:hover,
   &:focus {
