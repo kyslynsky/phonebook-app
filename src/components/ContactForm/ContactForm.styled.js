@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-// import { RiUser3Line } from 'react-icons/ri';
-// import { TbDeviceMobile } from 'react-icons/tb';
 
 export const Form = styled.form`
   position: relative;
