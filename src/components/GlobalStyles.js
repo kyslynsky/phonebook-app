@@ -1,5 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 import 'normalize.css';
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  width: 100%;
+  padding: 0px 20px;
+`;
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -49,6 +55,4 @@ ul {
 a {
   text-decoration: none;
 }
-
-
 `;
