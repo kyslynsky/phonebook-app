@@ -1,5 +1,6 @@
 import { useGetContactsQuery } from 'redux/phonebook/contactsSlice';
 import { Container } from 'components/GlobalStyles';
+import { ContactForm } from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 
 const PhonebookPage = () => {
@@ -7,6 +8,7 @@ const PhonebookPage = () => {
 
   return (
     <Container>
+      <ContactForm />
       {isFetching && <div>loading!</div>}
       {contacts && <ContactList contacts={contacts} />}
       {isError && <div>Something went wrong...</div>}

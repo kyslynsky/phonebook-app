@@ -1,5 +1,6 @@
 // import { useSelector, useDispatch } from 'react-redux/es/exports';
 // import { getContacts, getFilterValue, deleteContact } from 'redux/contacts';
+import PropTypes from 'prop-types';
 import { ContactItem } from 'components/ContactItem';
 import { List } from './ContactList.styled';
 
@@ -22,4 +23,12 @@ export const ContactList = ({ contacts }) => {
       ))}
     </List>
   );
+};
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ),
 };

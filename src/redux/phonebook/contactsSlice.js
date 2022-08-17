@@ -1,53 +1,35 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import axios from 'axios';
-
-const axiosBaseQuery =
-  ({ baseUrl } = { baseUrl: '' }) =>
-  async ({ url, method, data, params }) => {
-    try {
-      const result = await axios({ url: baseUrl + url, method, data, params });
-      return { data: result.data };
-    } catch (axiosError) {
-      let err = axiosError;
-      return {
-        error: {
-          status: err.response?.status,
-          data: err.response?.data || err.message,
-        },
-      };
-    }
-  };
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const contactsApi = createApi({
   reducerPath: 'contacts',
-  baseQuery: axiosBaseQuery({
+  baseQuery: fetchBaseQuery({
     baseUrl: 'https://62fb5dbfe4bcaf535182e287.mockapi.io/api',
   }),
   tagTypes: ['Contacts'],
-  endpoints: builder => ({
-    getContacts: builder.query({
+  endpoints: build => ({
+    getContacts: build.query({
       query: () => ({
         url: `/contacts`,
         method: 'GET',
       }),
       providesTags: ['Contacts'],
     }),
-    getContactsById: builder.query({
-      query: id => ({
-        url: `/contacts/${id}`,
-        method: 'GET',
-      }),
-      providesTags: ['Contacts'],
-    }),
-    addContact: builder.mutation({
-      query: newContact => ({
+    // getContactsById: build.query({
+    //   query: id => ({
+    //     url: `/contacts/${id}`,
+    //     method: 'GET',
+    //   }),
+    //   providesTags: ['Contacts'],
+    // }),
+    addContact: build.mutation({
+      query: body => ({
         url: '/contacts',
         method: 'POST',
-        body: newContact,
+        body,
       }),
       invalidatesTags: ['Contacts'],
     }),
-    deleteContact: builder.mutation({
+    deleteContact: build.mutation({
       query: contactId => ({
         url: `/contacts/${contactId}`,
         method: 'DELETE',
@@ -59,7 +41,6 @@ export const contactsApi = createApi({
 
 export const {
   useGetContactsQuery,
-  useGetContactsByIdQuery,
   useAddContactMutation,
   useDeleteContactMutation,
 } = contactsApi;
