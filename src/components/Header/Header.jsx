@@ -9,7 +9,7 @@ export const Header = () => {
       <header>
         <Container>
           <nav>
-            <S.NavItem to="/">Contacts</S.NavItem>
+            <S.NavItem to="/">Phonebook</S.NavItem>
           </nav>
         </Container>
       </header>

@@ -33,7 +33,7 @@ export const ContactForm = () => {
     e.preventDefault();
     try {
       if (
-        contacts.some(
+        contacts?.some(
           contact => contact.name.toLowerCase() === name.toLowerCase()
         )
       ) {
