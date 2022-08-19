@@ -14,7 +14,10 @@ export const ContactItem = ({ id, name, phone }) => {
         <S.ContactName>{name}: </S.ContactName>
         {phone}
       </p>
-      <S.Button onClick={() => navigate(`/edit/${id}`)} disabled={isDeleting}>
+      <S.Button
+        onClick={() => navigate(`/phonebook/edit/${id}`)}
+        disabled={isDeleting}
+      >
         {isDeleting ? <Spinner size={16} /> : 'Edit'}
       </S.Button>
       <S.Button onClick={() => deleteContact(id)} disabled={isDeleting}>

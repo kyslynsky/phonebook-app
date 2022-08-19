@@ -29,6 +29,7 @@ export const ContactForm = () => {
         return;
     }
   };
+
   const handleSubmit = async e => {
     e.preventDefault();
     try {
@@ -53,15 +54,20 @@ export const ContactForm = () => {
       setName('');
       setPhone('');
     } catch (error) {
-      console.log(error);
+      Notify.failure(error.message, {
+        clickToClose: true,
+        distance: '20px',
+        fontFamily: 'inherit',
+      });
     }
   };
 
   return (
     <S.Form onSubmit={handleSubmit}>
-      <S.Label>
-        Name
-        <S.Input
+      <S.AddFormLabelIco>
+        <S.UserIco />
+        <S.AddFormInput
+          placeholder="Name"
           value={name}
           onChange={handleChange}
           type="text"
@@ -70,11 +76,12 @@ export const ContactForm = () => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-      </S.Label>
+      </S.AddFormLabelIco>
 
-      <S.Label>
-        Number
-        <S.Input
+      <S.AddFormLabelIco>
+        <S.PhoneIco />
+        <S.AddFormInput
+          placeholder="Number"
           value={phone}
           onChange={handleChange}
           type="tel"
@@ -83,10 +90,10 @@ export const ContactForm = () => {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-      </S.Label>
-      <S.Button type="submit" disabled={isAdding}>
+      </S.AddFormLabelIco>
+      <S.AddFormBtn type="submit" disabled={isAdding}>
         {isAdding ? <Spinner size={15} /> : 'Add contact'}
-      </S.Button>
+      </S.AddFormBtn>
     </S.Form>
   );
 };

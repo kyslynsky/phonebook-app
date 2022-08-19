@@ -1,1 +1,1 @@
-export { EditContactModal } from './EditContactModal';
+export { default } from './EditContactModal';

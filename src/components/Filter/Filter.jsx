@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from 'redux/phonebook/filterContactsSlice';
-import { FilterWrapper } from './Filter.styled';
-import { Input, Label } from '../ContactForm';
+import * as S from './Filter.styled';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -12,11 +11,16 @@ export const Filter = () => {
   };
 
   return (
-    <FilterWrapper>
-      <Label>
-        Find contacts by name
-        <Input type="text" value={filterValue} onChange={handleChangeInput} />
-      </Label>
-    </FilterWrapper>
+    <S.FilterWrapper>
+      <S.FilterLabel>
+        <S.FilterIco />
+        <S.FilteInput
+          placeholder="Find contacts by name"
+          type="text"
+          value={filterValue}
+          onChange={handleChangeInput}
+        />
+      </S.FilterLabel>
+    </S.FilterWrapper>
   );
 };
