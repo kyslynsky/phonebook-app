@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Notify } from 'notiflix';
 import { useState } from 'react';
 import { Spinner } from 'components/Spinner';
-import * as C from "components/ContactForm/ContactForm.styled"
+import * as C from 'components/ContactForm/ContactForm.styled';
 
 export const EditContactForm = ({
   initValues = { name: '', phone: '' },
@@ -48,7 +48,7 @@ export const EditContactForm = ({
   return (
     <C.Form onSubmit={handleSubmitChanges}>
       <C.AddFormLabelIco>
-        Name
+        <C.UserIco />
         <C.AddFormInput
           value={initName}
           onChange={handleChange}
@@ -59,9 +59,8 @@ export const EditContactForm = ({
           required
         />
       </C.AddFormLabelIco>
-
       <C.AddFormLabelIco>
-        Number
+        <C.PhoneIco />
         <C.AddFormInput
           value={initPhone}
           onChange={handleChange}

@@ -6,6 +6,7 @@ import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
 import { Outlet } from 'react-router-dom';
+import { Loader } from 'components/Loader';
 
 const PhonebookPage = () => {
   const { data: contacts = [], isError, isFetching } = useGetContactsQuery();
@@ -21,7 +22,7 @@ const PhonebookPage = () => {
   return (
     <Container>
       <ContactForm />
-      {isFetching && <div>loading!</div>}
+      {isFetching && <Loader />}
       {contacts.length > 0 && (
         <>
           <Filter />
@@ -29,7 +30,7 @@ const PhonebookPage = () => {
         </>
       )}
       {isError && <div>Something went wrong...</div>}
-      <Suspense fallback={<div>Loading modal</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </Container>

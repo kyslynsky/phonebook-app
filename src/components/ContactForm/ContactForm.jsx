@@ -43,6 +43,8 @@ export const ContactForm = () => {
           distance: '20px',
           fontFamily: 'inherit',
         });
+
+        return;
       }
 
       await addContact({ name, phone });

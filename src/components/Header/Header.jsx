@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container } from 'components/GlobalStyles';
 import * as S from './Header.styled';
+import { Loader } from 'components/Loader';
 
 export const Header = () => {
   return (
@@ -13,7 +14,7 @@ export const Header = () => {
           </nav>
         </Container>
       </header>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </>

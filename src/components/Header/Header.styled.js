@@ -8,7 +8,7 @@ export const NavItem = styled(NavLink)`
   font-size: 1rem;
   font-weight: 500;
   line-height: normal;
-  color: #fff;
+  color: #1976d2;
   transition: all 0.2s ease-in-out;
 
   &.active {
@@ -17,6 +17,6 @@ export const NavItem = styled(NavLink)`
 
   :hover:not(.active),
   :focus-visible:not(.active) {
-    color: #d9514eff;
+    color: #1565c0;
   }
 `;
