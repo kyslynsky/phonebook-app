@@ -38,4 +38,5 @@ export const PhoneIco = styled(FaPhoneSquareAlt)`
   position: absolute;
   width: 28px;
   height: 28px;
+  
 `;
