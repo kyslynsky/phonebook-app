@@ -7,13 +7,17 @@ import { Loader } from 'components/Loader';
 export const Header = () => {
   return (
     <>
-      <header>
+      <S.HeaderBar>
         <Container>
-          <nav>
+          <S.HeaderNav>
             <S.NavItem to="/">Phonebook</S.NavItem>
-          </nav>
+            <S.NavWrapper>
+              <S.NavItem to="login">Login</S.NavItem>
+              <S.NavItem to="signup">SignUp</S.NavItem>
+            </S.NavWrapper>
+          </S.HeaderNav>
         </Container>
-      </header>
+      </S.HeaderBar>
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>

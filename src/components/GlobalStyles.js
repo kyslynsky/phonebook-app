@@ -39,13 +39,16 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: inherit;
   font-weight: 500;
   font-size: 0.9rem;
   line-height: 1.3;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: #1976d2;
   box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
     0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
@@ -78,8 +81,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Advent Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgba(40, 45, 108, 0.049);

@@ -4,8 +4,6 @@ export const contactsApi = createApi({
   reducerPath: 'contacts',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://62fb5dbfe4bcaf535182e287.mockapi.io/api',
-
-    // baseUrl: 'https://62fe894fa85c52ee48397775.mockapi.io',
   }),
   tagTypes: ['Contacts'],
   endpoints: build => ({
@@ -26,7 +24,7 @@ export const contactsApi = createApi({
     updateContact: build.mutation({
       query: fields => ({
         url: `/contacts/${fields.id}`,
-        method: 'PUT',
+        method: 'PATCH',
         body: fields,
       }),
       invalidatesTags: ['Contacts'],
@@ -56,3 +54,6 @@ export const {
   useUpdateContactMutation,
   useDeleteContactMutation,
 } = contactsApi;
+
+
+// https://connections-api.herokuapp.com
