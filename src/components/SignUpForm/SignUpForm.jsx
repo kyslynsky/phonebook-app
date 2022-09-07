@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useSignupUserMutation } from 'redux/phonebook/authApi';
@@ -21,6 +22,7 @@ const validationSchema = Yup.object().shape({
 
 export const SignUpForm = () => {
   const [signUp, { isLoading }] = useSignupUserMutation();
+  const navigate = useNavigate();
   const [shown, setShown] = useState(false);
 
   const handleClickShow = () => {
@@ -40,10 +42,11 @@ export const SignUpForm = () => {
 
     signUp({ name, email, password })
       .unwrap()
-      .then(payload =>
-        message.successNotice(`${payload.user.name} successfully registered`)
-      )
-      .catch(error => message.failureNotice(error.message));
+      .then(payload => {
+        message.successNotice(`${payload.user.name} successfully registered`);
+        navigate('/phonebook');
+      })
+      .catch(error => message.failureNotice('User exist'));
   };
 
   return (

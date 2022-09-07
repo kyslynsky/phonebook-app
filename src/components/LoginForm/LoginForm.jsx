@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useLoginMutation } from 'redux/phonebook/authApi';
@@ -17,6 +18,7 @@ const validationSchema = Yup.object().shape({
 
 export const LoginForm = () => {
   const [login, { isLoading }] = useLoginMutation();
+  const navigate = useNavigate();
   const [shown, setShown] = useState(false);
 
   const handleClickShow = () => {
@@ -34,9 +36,10 @@ export const LoginForm = () => {
   const onSubmit = async data => {
     await login(data)
       .unwrap()
-      .then(payload =>
-        message.successNotice(`Nice to see you ${payload.user.name}`)
-      )
+      .then(payload => {
+        message.successNotice(`Nice to see you ${payload.user.name}`);
+        navigate('/phonebook');
+      })
       .catch(error => message.failureNotice('Check credentials'));
   };
 
@@ -46,7 +49,7 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input placeholder="Email" {...register('email')} />
         <p>{errors.email?.message}</p>
-        
+
         <div>
           <input
             type={shown ? 'text' : 'password'}

@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { Container } from 'components/GlobalStyles';
 import * as S from './Header.styled';
@@ -6,14 +7,14 @@ import { Loader } from 'components/Loader';
 import { UserMenu } from 'components/UserMenu';
 
 export const Header = () => {
-  const a = 1;
+  const userToken = useSelector(state => state.auth.token);
 
   return (
     <>
       <S.HeaderBar>
         <Container>
           <S.HeaderNav>
-            {a ? (
+            {userToken ? (
               <S.NavItem to="/">Phonebook</S.NavItem>
             ) : (
               <S.NavItem disabled to="/">
@@ -21,9 +22,14 @@ export const Header = () => {
               </S.NavItem>
             )}
             <S.NavWrapper>
-              <S.NavItem to="login">Login</S.NavItem>
-              <S.NavItem to="signup">SignUp</S.NavItem>
-              <UserMenu />
+              {userToken ? (
+                <UserMenu />
+              ) : (
+                <>
+                  <S.NavItem to="login">Login</S.NavItem>
+                  <S.NavItem to="signup">SignUp</S.NavItem>
+                </>
+              )}
             </S.NavWrapper>
           </S.HeaderNav>
         </Container>

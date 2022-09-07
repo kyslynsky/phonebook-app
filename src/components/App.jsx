@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { GlobalStyle } from 'components/GlobalStyles';
 import { useGetCurrentUserQuery } from 'redux/phonebook/authApi';
 import { Header } from 'components/Header';
+import { PrivateRoutes } from 'components/PrivateRoutes';
 
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
@@ -21,9 +22,11 @@ export const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Header />}>
-          <Route index element={<Navigate to="/phonebook" />} />
-          <Route path="phonebook/*" element={<PhonebookPage />}>
-            <Route path="edit/:contactId" element={<EditContactModal />} />
+          <Route path="/" element={<PrivateRoutes />}>
+            <Route index element={<Navigate to="/phonebook" />} />
+            <Route path="phonebook/*" element={<PhonebookPage />}>
+              <Route path="edit/:contactId" element={<EditContactModal />} />
+            </Route>
           </Route>
           <Route path="signup" element={<SignUpPage />} />
           <Route path="login" element={<LoginPage />} />
