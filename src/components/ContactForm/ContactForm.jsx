@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import { Notify } from 'notiflix';
 import * as S from './ContactForm.styled';
 import {
   useGetContactsQuery,
   useAddContactMutation,
 } from 'redux/phonebook/contactsSlice';
 import { Spinner } from 'components/Spinner';
+import {
+  warningNotice,
+  successNotice,
+  failureNotice,
+} from 'features/notify/notify';
 
 export const ContactForm = () => {
   const { data: contacts } = useGetContactsQuery();
@@ -38,29 +42,16 @@ export const ContactForm = () => {
           contact => contact.name.toLowerCase() === name.toLowerCase()
         )
       ) {
-        Notify.warning(`${name} is already exist`, {
-          clickToClose: true,
-          distance: '20px',
-          fontFamily: 'inherit',
-        });
-
+        warningNotice(`${name} is already exist`);
         return;
       }
 
       await addContact({ name, phone });
-      Notify.success(`${name} successfully added`, {
-        clickToClose: true,
-        distance: '20px',
-        fontFamily: 'inherit',
-      });
+      successNotice(`${name} successfully added`);
       setName('');
       setPhone('');
     } catch (error) {
-      Notify.failure(error.message, {
-        clickToClose: true,
-        distance: '20px',
-        fontFamily: 'inherit',
-      });
+      failureNotice(error.message);
     }
   };
 

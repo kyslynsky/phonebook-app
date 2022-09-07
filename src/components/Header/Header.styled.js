@@ -26,6 +26,7 @@ export const NavItem = styled(NavLink)`
   line-height: normal;
   color: #1976d2;
   transition: all 0.2s ease-in-out;
+  pointer-events: ${props => (props.disabled ? 'none' : 'all')};
 
   &.active {
     color: #2da8d8ff;

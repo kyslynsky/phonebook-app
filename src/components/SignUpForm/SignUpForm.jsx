@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { useSignupUserMutation } from 'redux/phonebook/authApi';
+import { Spinner } from 'components/Spinner';
+import * as S from './SignUpForm.styled';
+import * as message from 'features/notify/notify';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   email: Yup.string().required('Email is required').email('Email is invalid'),
   password: Yup.string()
     .required('Password is required')
-    .min(6, 'Password must be at least 6 characters')
+    .min(7, 'Password must be at least 7 characters')
     .max(40, 'Password must not exceed 40 characters'),
   confirmPassword: Yup.string()
     .required('Confirm Password is required')
@@ -15,18 +20,30 @@ const validationSchema = Yup.object().shape({
 });
 
 export const SignUpForm = () => {
+  const [signUp, { isLoading }] = useSignupUserMutation();
+  const [shown, setShown] = useState(false);
+
+  const handleClickShow = () => {
+    setShown(!shown);
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
   const onSubmit = data => {
-    console.log(data);
-    reset();
+    const { name, email, password } = data;
+
+    signUp({ name, email, password })
+      .unwrap()
+      .then(payload =>
+        message.successNotice(`${payload.user.name} successfully registered`)
+      )
+      .catch(error => message.failureNotice(error.message));
   };
 
   return (
@@ -35,25 +52,26 @@ export const SignUpForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input type="text" placeholder="Name" {...register('name')} />
         <p>{errors.name?.message}</p>
-
         <input placeholder="Email" {...register('email')} />
         <p>{errors.email?.message}</p>
-
         <input
-          type="password"
+          type={shown ? 'text' : 'password'}
           placeholder="Password"
           {...register('password')}
         />
+        <span onClick={handleClickShow}>
+          {shown ? <S.ShownIco /> : <S.HideIco />}
+        </span>
         <p>{errors.password?.message}</p>
-
         <input
           type="password"
           placeholder="Confirm Password"
           {...register('confirmPassword')}
         />
         <p>{errors.confirmPassword?.message}</p>
-
-        <button type="submit">Sign up</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? <Spinner size={15} /> : 'Sign up'}
+        </button>
       </form>
     </div>
   );

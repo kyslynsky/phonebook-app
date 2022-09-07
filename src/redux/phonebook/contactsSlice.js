@@ -55,5 +55,3 @@ export const {
   useDeleteContactMutation,
 } = contactsApi;
 
-
-// https://connections-api.herokuapp.com
