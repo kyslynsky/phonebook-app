@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
-  useGetContactByIdQuery,
+  useGetContactsQuery,
   useUpdateContactMutation,
 } from 'redux/phonebook/contactsSlice';
 import { EditContactForm } from 'components/EditContactForm';
@@ -10,10 +10,19 @@ import * as S from './EditContactModal.styled';
 const EditContactModal = () => {
   const navigate = useNavigate();
   const { contactId } = useParams();
-  const { data: contact } = useGetContactByIdQuery(contactId);
+  // const { data: contact } = useGetContactByIdQuery(contactId);
   const [updateContact, { isLoading }] = useUpdateContactMutation();
 
-  const closeModal = () => navigate('/phonebook');
+  const { data } = useGetContactsQuery();
+
+  let contact = '';
+  const getContactById = async id => {
+    contact = data?.find(obj => id === obj.id);
+
+    console.log(contact);
+    return contact;
+  };
+  getContactById(contactId);
 
   const hanldeUpdateContact = async inputs => {
     try {
@@ -23,6 +32,17 @@ const EditContactModal = () => {
       console.log(error);
     }
   };
+
+  const closeModal = () => navigate('/phonebook');
+
+  // const hanldeUpdateContact = async inputs => {
+  //   try {
+  //     await updateContact({ id: contactId, ...inputs });
+  //     closeModal();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     const handleEscPress = e => {
@@ -51,7 +71,7 @@ const EditContactModal = () => {
         </S.CloseBtn>
         {contact && (
           <EditContactForm
-            initValues={{ name: contact.name, phone: contact.phone }}
+            initValues={{ name: contact.name, number: contact.number }}
             text={'Save'}
             onSubmit={hanldeUpdateContact}
             disable={isLoading}

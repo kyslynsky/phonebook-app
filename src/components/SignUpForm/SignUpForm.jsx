@@ -46,7 +46,7 @@ export const SignUpForm = () => {
         message.successNotice(`${payload.user.name} successfully registered`);
         navigate('/phonebook');
       })
-      .catch(error => message.failureNotice('User exist'));
+      .catch(() => message.failureNotice('User already exist'));
   };
 
   return (

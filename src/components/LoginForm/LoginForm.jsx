@@ -40,7 +40,7 @@ export const LoginForm = () => {
         message.successNotice(`Nice to see you ${payload.user.name}`);
         navigate('/phonebook');
       })
-      .catch(error => message.failureNotice('Check credentials'));
+      .catch(() => message.failureNotice('Check credentials'));
   };
 
   return (

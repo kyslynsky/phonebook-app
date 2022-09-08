@@ -14,7 +14,7 @@ import {
 export const ContactForm = () => {
   const { data: contacts } = useGetContactsQuery();
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const [addContact, { isLoading: isAdding }] = useAddContactMutation();
 
   const handleChange = e => {
@@ -25,8 +25,8 @@ export const ContactForm = () => {
         setName(value);
         break;
 
-      case 'phone':
-        setPhone(value);
+      case 'number':
+        setNumber(value);
         break;
 
       default:
@@ -46,10 +46,10 @@ export const ContactForm = () => {
         return;
       }
 
-      await addContact({ name, phone });
+      await addContact({ name, number });
       successNotice(`${name} successfully added`);
       setName('');
-      setPhone('');
+      setNumber('');
     } catch (error) {
       failureNotice(error.message);
     }
@@ -75,10 +75,10 @@ export const ContactForm = () => {
         <S.PhoneIco />
         <S.AddFormInput
           placeholder="Number"
-          value={phone}
+          value={number}
           onChange={handleChange}
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

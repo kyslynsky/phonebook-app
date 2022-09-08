@@ -5,13 +5,13 @@ import { Spinner } from 'components/Spinner';
 import * as C from 'components/ContactForm/ContactForm.styled';
 
 export const EditContactForm = ({
-  initValues = { name: '', phone: '' },
+  initValues = { name: '', number: '' },
   text,
   onSubmit,
   disable,
 }) => {
   const [initName, setInitName] = useState(initValues.name);
-  const [initPhone, setInitPhone] = useState(initValues.phone);
+  const [initNumber, setInitNumber] = useState(initValues.number);
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -21,8 +21,8 @@ export const EditContactForm = ({
         setInitName(value);
         break;
 
-      case 'phone':
-        setInitPhone(value);
+      case 'number':
+        setInitNumber(value);
         break;
 
       default:
@@ -34,7 +34,7 @@ export const EditContactForm = ({
     e.preventDefault();
 
     try {
-      await onSubmit({ name: initName, phone: initPhone });
+      await onSubmit({ name: initName, number: initNumber });
       Notify.info('Changes saved', {
         clickToClose: true,
         distance: '20px',
@@ -62,10 +62,10 @@ export const EditContactForm = ({
       <C.AddFormLabelIco>
         <C.PhoneIco />
         <C.AddFormInput
-          value={initPhone}
+          value={initNumber}
           onChange={handleChange}
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

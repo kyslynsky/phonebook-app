@@ -5,7 +5,7 @@ import { Spinner } from 'components/Spinner';
 import * as S from './ContactItem.styled';
 import { Notify } from 'notiflix';
 
-export const ContactItem = ({ id, name, phone }) => {
+export const ContactItem = ({ id, name, number }) => {
   const navigate = useNavigate();
   const [deleteContact, { isLoading: isDeleting, isSuccess, isError }] =
     useDeleteContactMutation();
@@ -25,7 +25,7 @@ export const ContactItem = ({ id, name, phone }) => {
       )}
       <p>
         <S.ContactName>{name}: </S.ContactName>
-        {phone}
+        {number}
       </p>
       <S.ContactBtnsBox>
         <S.ContactBtn
@@ -45,5 +45,5 @@ export const ContactItem = ({ id, name, phone }) => {
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
 };
