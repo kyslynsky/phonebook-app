@@ -2,8 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { contactsApi } from 'redux/phonebook/contactsSlice';
 import { filterContactsSlice } from 'redux/phonebook/filterContactsSlice';
-import { userSlice } from 'redux/phonebook/userSlice';
-import { authApi } from 'redux/phonebook/authApi';
+import { userSlice } from 'redux/auth/userSlice';
+import { authApi } from 'redux/auth/authApi';
 import {
   persistStore,
   persistReducer,

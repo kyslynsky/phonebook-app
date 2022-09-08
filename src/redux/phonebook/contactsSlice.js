@@ -24,18 +24,14 @@ export const contactsApi = createApi({
       }),
       providesTags: ['Contacts'],
     }),
-    getContactById: build.query({
-      query: id => ({
-        url: `/contacts/${id}`,
-        method: 'GET',
-      }),
-      providesTags: ['Contacts'],
-    }),
     updateContact: build.mutation({
-      query: fields => ({
-        url: `/contacts/${fields.id}`,
+      query: ({ name, number, id }) => ({
+        url: `/contacts/${id}`,
         method: 'PATCH',
-        body: fields,
+        body: {
+          name,
+          number,
+        },
       }),
       invalidatesTags: ['Contacts'],
     }),

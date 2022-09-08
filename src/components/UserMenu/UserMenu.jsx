@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useLogoutMutation } from 'redux/phonebook/authApi';
+import { useLogoutMutation } from 'redux/auth/authApi';
 import { useSelector } from 'react-redux';
 import { Spinner } from 'components/Spinner';
 import * as message from 'features/notify/notify';
@@ -11,7 +11,10 @@ export const UserMenu = () => {
   const handleLogout = () => {
     logoutUser()
       .unwrap()
-      .then(() => <Navigate to="/login" replace />)
+      .then(() => {
+        window.location.reload(false);
+        <Navigate to="/login" replace />;
+      })
       .catch(() => message.failureNotice('Something went wrong'));
   };
 

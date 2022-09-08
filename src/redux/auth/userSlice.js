@@ -39,5 +39,3 @@ export const userSlice = createSlice({
     });
   },
 });
-
-export const { setCredentials } = userSlice.actions;

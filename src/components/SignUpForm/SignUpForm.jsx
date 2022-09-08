@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { useSignupUserMutation } from 'redux/phonebook/authApi';
+import { useSignupUserMutation } from 'redux/auth/authApi';
 import { Spinner } from 'components/Spinner';
 import * as S from './SignUpForm.styled';
 import * as message from 'features/notify/notify';

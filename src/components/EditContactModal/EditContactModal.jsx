@@ -10,18 +10,16 @@ import * as S from './EditContactModal.styled';
 const EditContactModal = () => {
   const navigate = useNavigate();
   const { contactId } = useParams();
-  // const { data: contact } = useGetContactByIdQuery(contactId);
   const [updateContact, { isLoading }] = useUpdateContactMutation();
-
+  // -move to other file
   const { data } = useGetContactsQuery();
 
   let contact = '';
   const getContactById = async id => {
     contact = data?.find(obj => id === obj.id);
-
-    console.log(contact);
     return contact;
   };
+  //-----
   getContactById(contactId);
 
   const hanldeUpdateContact = async inputs => {
@@ -34,15 +32,6 @@ const EditContactModal = () => {
   };
 
   const closeModal = () => navigate('/phonebook');
-
-  // const hanldeUpdateContact = async inputs => {
-  //   try {
-  //     await updateContact({ id: contactId, ...inputs });
-  //     closeModal();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     const handleEscPress = e => {
