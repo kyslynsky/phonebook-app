@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { Notify } from 'notiflix';
 import { useState } from 'react';
 import { Spinner } from 'components/Spinner';
 import * as C from 'components/ContactForm/ContactForm.styled';
+import * as message from 'features/notify/notify';
 
 export const EditContactForm = ({
   initValues = { name: '', number: '' },
@@ -35,11 +35,7 @@ export const EditContactForm = ({
 
     try {
       await onSubmit({ name: initName, number: initNumber });
-      Notify.info('Changes saved', {
-        clickToClose: true,
-        distance: '20px',
-        fontFamily: 'inherit',
-      });
+      message.successNotice('Changes saved');
     } catch (error) {
       console.log(error);
     }

@@ -7,10 +7,16 @@ import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
 import { Outlet } from 'react-router-dom';
 import { Loader } from 'components/Loader';
+import { useGetCurrentUserQuery } from 'redux/auth/authApi';
 
 const PhonebookPage = () => {
   const { data: contacts = [], isError, isFetching } = useGetContactsQuery();
   const filterValue = useSelector(state => state.filter.value);
+  const userToken = useSelector(state => state.auth.token);
+
+  useGetCurrentUserQuery(undefined, {
+    skip: !userToken,
+  });
 
   const filteredContacts = useMemo(() => {
     return contacts?.filter(

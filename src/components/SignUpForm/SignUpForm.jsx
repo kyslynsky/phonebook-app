@@ -5,8 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useSignupUserMutation } from 'redux/auth/authApi';
 import { Spinner } from 'components/Spinner';
-import * as S from './SignUpForm.styled';
 import * as message from 'features/notify/notify';
+import { ShownIco, HideIco } from 'components/GlobalStyles';
+import * as C from 'components/LoginForm/LoginForm.styled';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -50,32 +51,34 @@ export const SignUpForm = () => {
   };
 
   return (
-    <div>
-      <h2>Let's register</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder="Name" {...register('name')} />
-        <p>{errors.name?.message}</p>
-        <input placeholder="Email" {...register('email')} />
-        <p>{errors.email?.message}</p>
-        <input
-          type={shown ? 'text' : 'password'}
-          placeholder="Password"
-          {...register('password')}
-        />
-        <span onClick={handleClickShow}>
-          {shown ? <S.ShownIco /> : <S.HideIco />}
-        </span>
-        <p>{errors.password?.message}</p>
-        <input
+    <C.FormWrapper>
+      <C.FormTitle>Let's register</C.FormTitle>
+      <C.SignForm onSubmit={handleSubmit(onSubmit)}>
+        <C.LoginInput type="text" placeholder="Name" {...register('name')} />
+        <C.ErrorText>{errors.name?.message}</C.ErrorText>
+        <C.LoginInput placeholder="Email" {...register('email')} />
+        <C.ErrorText>{errors.email?.message}</C.ErrorText>
+        <C.InputWrapper>
+          <C.PasswordInput
+            type={shown ? 'text' : 'password'}
+            placeholder="Password"
+            {...register('password')}
+          />
+          <C.RevealerWrapper onClick={handleClickShow}>
+            {shown ? <HideIco /> : <ShownIco />}
+          </C.RevealerWrapper>
+        </C.InputWrapper>
+        <C.ErrorText>{errors.password?.message}</C.ErrorText>
+        <C.LoginInput
           type="password"
           placeholder="Confirm Password"
           {...register('confirmPassword')}
         />
-        <p>{errors.confirmPassword?.message}</p>
-        <button type="submit" disabled={isLoading}>
+        <C.ErrorText>{errors.confirmPassword?.message}</C.ErrorText>
+        <C.SignFormBtn type="submit" disabled={isLoading}>
           {isLoading ? <Spinner size={15} /> : 'Sign up'}
-        </button>
-      </form>
-    </div>
+        </C.SignFormBtn>
+      </C.SignForm>
+    </C.FormWrapper>
   );
 };

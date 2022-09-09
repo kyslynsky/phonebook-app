@@ -5,8 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useLoginMutation } from 'redux/auth/authApi';
 import { Spinner } from 'components/Spinner';
-import * as C from 'components/SignUpForm/SignUpForm.styled.js';
 import * as message from 'features/notify/notify';
+import { ShownIco, HideIco } from 'components/GlobalStyles';
+import * as S from './LoginForm.styled';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required('Email is required').email('Email is invalid'),
@@ -44,28 +45,27 @@ export const LoginForm = () => {
   };
 
   return (
-    <div>
-      <h2>Let's sign in</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input placeholder="Email" {...register('email')} />
-        <p>{errors.email?.message}</p>
-
-        <div>
-          <input
+    <S.FormWrapper>
+      <S.FormTitle>Let's sign in</S.FormTitle>
+      <S.SignForm onSubmit={handleSubmit(onSubmit)}>
+        <S.LoginInput placeholder="Email" {...register('email')} />
+        <S.ErrorText>{errors.email?.message}</S.ErrorText>
+        <S.InputWrapper>
+          <S.PasswordInput
             type={shown ? 'text' : 'password'}
             placeholder="Password"
             {...register('password')}
           />
-          <span onClick={handleClickShow}>
-            {shown ? <C.ShownIco /> : <C.HideIco />}
-          </span>
-          <p>{errors.password?.message}</p>
-        </div>
+          <S.RevealerWrapper onClick={handleClickShow}>
+            {shown ? <HideIco /> : <ShownIco />}
+          </S.RevealerWrapper>
+        </S.InputWrapper>
+        <S.ErrorText>{errors.password?.message}</S.ErrorText>
 
-        <button type="submit" disabled={isLoading}>
+        <S.SignFormBtn type="submit" disabled={isLoading}>
           {isLoading ? <Spinner size={15} /> : 'Login'}
-        </button>
-      </form>
-    </div>
+        </S.SignFormBtn>
+      </S.SignForm>
+    </S.FormWrapper>
   );
 };

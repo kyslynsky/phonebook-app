@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const HeaderBar = styled.header`
-  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px; */
   box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
   margin-bottom: 4vw;
 `;
@@ -16,6 +15,7 @@ export const HeaderNav = styled.header`
 
 export const NavWrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const NavItem = styled(NavLink)`

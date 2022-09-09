@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import 'normalize.css';
 import styled from 'styled-components';
+import { RiEyeLine, RiEyeCloseLine } from 'react-icons/ri';
 
 export const Container = styled.div`
   width: 100%;
@@ -64,6 +65,16 @@ export const Button = styled.button`
   &:disabled {
     background-color: #ddd;
   }
+`;
+
+export const ShownIco = styled(RiEyeLine)`
+  width: 28px;
+  height: 28px;
+`;
+
+export const HideIco = styled(RiEyeCloseLine)`
+  width: 28px;
+  height: 28px;
 `;
 
 export const GlobalStyle = createGlobalStyle`
