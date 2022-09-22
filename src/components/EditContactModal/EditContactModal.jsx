@@ -6,12 +6,17 @@ import {
 } from 'redux/phonebook/contactsSlice';
 import { EditContactForm } from 'components/EditContactForm';
 import * as S from './EditContactModal.styled';
+import {
+  overlayAnimation,
+  modalAnimation,
+} from 'features/framer/modalAnimation';
+import { motion } from 'framer-motion';
 
 const EditContactModal = () => {
   const navigate = useNavigate();
   const { contactId } = useParams();
   const [updateContact, { isLoading }] = useUpdateContactMutation();
-  // -move to other file
+  //
   const { data } = useGetContactsQuery();
 
   let contact = '';
@@ -19,7 +24,7 @@ const EditContactModal = () => {
     contact = data?.find(obj => id === obj.id);
     return contact;
   };
-  //-----
+  //
   getContactById(contactId);
 
   const hanldeUpdateContact = async inputs => {
@@ -53,8 +58,12 @@ const EditContactModal = () => {
   };
 
   return (
-    <S.Overlay onClick={handleBackdropClick}>
-      <S.Modal>
+    <S.Overlay
+      as={motion.div}
+      {...overlayAnimation}
+      onClick={handleBackdropClick}
+    >
+      <S.Modal as={motion.div} {...modalAnimation}>
         <S.CloseBtn type="button" onClick={closeModal}>
           <S.CloseIco />
         </S.CloseBtn>

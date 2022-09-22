@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteContactMutation } from 'redux/phonebook/contactsSlice';
@@ -5,7 +6,9 @@ import { Spinner } from 'components/Spinner';
 import * as S from './ContactItem.styled';
 import { Notify } from 'notiflix';
 
-export const ContactItem = ({ id, name, number }) => {
+export const ContactItem = forwardRef((props, ref) => {
+  const { id, name, number } = props;
+
   const navigate = useNavigate();
   const [deleteContact, { isLoading: isDeleting, isSuccess, isError }] =
     useDeleteContactMutation();
@@ -19,7 +22,7 @@ export const ContactItem = ({ id, name, number }) => {
   }
 
   return (
-    <S.ListItem key={id}>
+    <S.ListItem ref={ref}>
       {isError && (
         <div>Something went wrong, please try again after reload</div>
       )}
@@ -40,7 +43,7 @@ export const ContactItem = ({ id, name, number }) => {
       </S.ContactBtnsBox>
     </S.ListItem>
   );
-};
+});
 
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,

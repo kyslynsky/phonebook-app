@@ -2,8 +2,9 @@ import { createGlobalStyle } from 'styled-components';
 import 'normalize.css';
 import styled from 'styled-components';
 import { RiEyeLine, RiEyeCloseLine } from 'react-icons/ri';
+import { motion } from 'framer-motion';
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   width: 100%;
   padding: 0px 20px;
 `;
