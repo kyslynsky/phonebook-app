@@ -11,6 +11,7 @@ import {
   modalAnimation,
 } from 'features/framer/modalAnimation';
 import { motion } from 'framer-motion';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const EditContactModal = () => {
   const navigate = useNavigate();
@@ -21,10 +22,29 @@ const EditContactModal = () => {
 
   let contact = '';
   const getContactById = async id => {
-    contact = data?.find(obj => id === obj.id);
-    return contact;
+    try {
+      contact = data?.find(obj => id === obj.id);
+      if (typeof contact === 'undefined') {
+        throw new Error("Contact doesn't exist");
+      }
+      return contact;
+    } catch (error) {
+      Report.warning(
+        `${error.message}`,
+        'We are sorry, it`s removed permanently',
+        'Back to phonebook',
+
+        () => {
+          navigate('/phonebook', { replace: true });
+        },
+        {
+          fontFamily: 'Advent Pro',
+          backOverlay: false,
+        }
+      );
+    }
   };
-  //
+
   getContactById(contactId);
 
   const hanldeUpdateContact = async inputs => {

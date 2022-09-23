@@ -8,6 +8,7 @@ const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
 const PhonebookPage = lazy(() => import('pages/PhonebookPage'));
 const EditContactModal = lazy(() => import('components/EditContactModal'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 export const AnimatedRoutes = () => {
   const location = useLocation();
@@ -24,7 +25,7 @@ export const AnimatedRoutes = () => {
           </Route>
           <Route path="signup" element={<SignUpPage />} />
           <Route path="login" element={<LoginPage />} />
-          <Route path="*" element={<div>Not Found</div>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </AnimatePresence>

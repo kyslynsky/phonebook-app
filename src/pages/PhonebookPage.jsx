@@ -8,7 +8,6 @@ import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
 import { Loader } from 'components/Loader';
 import { useGetCurrentUserQuery } from 'redux/auth/authApi';
-// import { containerAnimation } from 'features/framer/containerAnimation';
 
 const PhonebookPage = () => {
   const { data: contacts = [], isError, isFetching } = useGetContactsQuery();

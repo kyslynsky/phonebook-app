@@ -2,18 +2,29 @@ import styled from 'styled-components';
 import { Button, Input } from 'components/GlobalStyles';
 
 export const FormWrapper = styled.div`
-  max-width: 30vw;
+  max-width: 80vw;
   margin: 0 auto;
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   border-radius: 4px;
+
+  @media (min-width: 475px) and (max-width: 767px) {
+    max-width: 65vw;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 45vw;
+  }
+
+  @media screen and (min-width: 1024px) {
+    max-width: 30vw;
+  }
 `;
 
 export const FormTitle = styled.h2`
   margin-bottom: 15px;
   text-align: center;
-  font-family: 'Righteous', cursive;
-  font-size: 35px;
+  font-size: 2rem;
   color: #2da8d8ff;
 `;
 
@@ -40,9 +51,22 @@ export const LoginInput = styled(Input)`
 
 export const RevealerWrapper = styled.span`
   position: absolute;
-  right: 37%;
-  padding-top: 5px;
+  right: 17%;
+  padding-top: 7px;
+  padding-right: 5px;
   cursor: pointer;
+
+  @media (min-width: 475px) and (max-width: 767px) {
+    right: 23%;
+  }
+
+  @media screen and (min-width: 768px) {
+    right: 30%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    right: 37%;
+  }
 `;
 
 export const SignFormBtn = styled(Button)`

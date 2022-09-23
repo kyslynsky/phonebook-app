@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDeleteContactMutation } from 'redux/phonebook/contactsSlice';
 import { Spinner } from 'components/Spinner';
 import * as S from './ContactItem.styled';
-import { Notify } from 'notiflix';
+import { infoNotice } from 'features/notify/notify';
 
 export const ContactItem = forwardRef((props, ref) => {
   const { id, name, number } = props;
@@ -14,11 +14,7 @@ export const ContactItem = forwardRef((props, ref) => {
     useDeleteContactMutation();
 
   if (isSuccess) {
-    Notify.info(`${name} deleted`, {
-      clickToClose: true,
-      distance: '20px',
-      fontFamily: 'inherit',
-    });
+    infoNotice(`${name} deleted`);
   }
 
   return (

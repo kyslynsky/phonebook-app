@@ -6,7 +6,7 @@ export const HeaderBar = styled.header`
   margin-bottom: 4vw;
 `;
 
-export const HeaderNav = styled.header`
+export const HeaderNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,13 +20,18 @@ export const NavWrapper = styled.div`
 
 export const NavItem = styled(NavLink)`
   display: block;
-  padding: 7px 17px;
+  padding: 4px 10px;
   font-family: 'Righteous', cursive;
-  font-size: 2rem;
+  font-size: 1.1rem;
   line-height: normal;
   color: #1976d2;
   transition: all 0.2s ease-in-out;
   pointer-events: ${props => (props.disabled ? 'none' : 'all')};
+
+  @media screen and (min-width: 1024px) {
+    padding: 7px 17px;
+    font-size: 2rem;
+  }
 
   &.active {
     color: #2da8d8ff;

@@ -6,6 +6,17 @@ export const warningNotice = message => {
     distance: '7vw',
     fontFamily: 'Advent Pro',
     fontSize: '1rem',
+    showOnlyTheLastOne: true,
+  });
+};
+
+export const infoNotice = message => {
+  Notify.info(message, {
+    clickToClose: true,
+    distance: '7vw',
+    fontFamily: 'Advent Pro',
+    fontSize: '1rem',
+    showOnlyTheLastOne: true,
   });
 };
 
@@ -15,6 +26,7 @@ export const successNotice = message => {
     distance: '7vw',
     fontFamily: 'Advent Pro',
     fontSize: '1rem',
+    showOnlyTheLastOne: true,
   });
 };
 
@@ -24,5 +36,6 @@ export const failureNotice = message => {
     distance: '7vw',
     fontFamily: 'Advent Pro',
     fontSize: '1rem',
+    showOnlyTheLastOne: true,
   });
 };
